@@ -1,0 +1,26 @@
+<h1>Cohort <%= @cohort.name.capitalize %></h1>
+
+
+	<ul>
+		<% @members.each do |member| %>
+		<li>
+			<%= "#{member.name.capitalize} - #{@cohort.memberships.find_by(user_id: member.id).role.capitalize}" %><%= button_to "Remove", "/cohorts/#{@cohort.id}/members/#{member.id}", :method => :delete %>
+		</li>
+		<% end %>
+	</ul>
+
+<%= link_to "Create new user", "/users"%>
+
+<%= form_tag "/cohorts/#{@cohort.id}/members", method: "create" do %>
+	<%= label_tag 'user[name]', "Select a user:" %>
+	<%= select_tag 'membership[user_id]', options_from_collection_for_select(@users, :id, :name) %>
+
+	<%= label_tag 'membership[role]', "Teacher or Student:" %>
+	<%= select_tag 'membership[role]', options_for_select([['Student', 'student'], ['Teacher', 'teacher']]) %>
+
+	<%= submit_tag "submit" %>
+
+<% end %>
+
+<p><%= link_to "See all Users", "/users" %></p>
+<p><%= link_to "See all Cohorts", "/cohorts" %></p>

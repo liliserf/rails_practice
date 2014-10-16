@@ -1,0 +1,35 @@
+users index form:
+
+<%= form_tag("/users", method: "post") do %>
+	<%= label_tag ('user[name]', "New User:" %>
+	<%= text_field_tag('user[name]')%><br>
+	<%= submit_tag("submit" %>
+<% end %>
+
+cohorts index form: 
+
+<h2>
+	<ul>
+		<% @members.each do |member| %>
+		<li>
+			<%= member.name %>
+		</li>
+		<% end %>
+	</ul>
+</h2>
+
+<%= form_tag ("/cohorts", method: "post") do %>
+	<%= lavel_tag('cohort[name]', "New Cohort:" %>
+	<%= text_field_tag('cohort[name]')%><br>
+	<%= submit_tag("submit")%>
+<% end %>
+
+
+
+1. in Cohorts controller: update method to create a new membership with params
+2. pull user_id to create membership
+3. use existing cohort_id to create membership
+4. require role to create membership
+
+form points to memb controller
+submit 3 datas and goes to membership.create

@@ -1,0 +1,18 @@
+<h2>All Cohorts:</h2>
+<ul>
+	<% @cohorts.each do |cohort|%>
+	<li>
+		<%= link_to cohort.name.capitalize, "/cohorts/#{cohort.id}"%>
+	</li>
+	<% end %>
+</ul>
+
+<h3>Add a cohort</h3>
+<%= form_tag("/cohorts", method: "post") do %>
+  <%= label_tag('cohort[name]', "Name:")%>
+  <%= text_field_tag('cohort[name]')%><br>
+  <%= submit_tag("submit") %>
+
+<% end %>
+
+<p><%= link_to "See all Users", "/users" %></p>
